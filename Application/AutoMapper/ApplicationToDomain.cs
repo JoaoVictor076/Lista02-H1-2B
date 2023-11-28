@@ -1,0 +1,32 @@
+﻿using AutoMapper;
+
+using ListaH1.Application.ViewModels;
+using ListaH1.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ListaH1.Application.AutoMapper
+{
+	public class ApplicationToDomain : Profile
+	{
+		public ApplicationToDomain()
+		{
+
+			CreateMap<ProdutoViewModel, Produto>()
+			   .ConstructUsing(q => new Produto(q.CodigoId, q.Nome,q.Descricao,q.Ativo,q.Valor,q.DataCadastro,q.QuantidadeEstoque));
+
+			CreateMap<NovoProdutoViewModel, Produto>()
+			   .ConstructUsing(q => new Produto(q.CodigoId,q.Nome, q.Descricao, q.Ativo, q.Valor, q.DataCadastro, q.QuantidadeEstoque));
+
+			CreateMap<FornecedorViewModel, Fornecedor>()
+				.ConstructUsing(f => new Fornecedor(f.CodigoID,f.Nome,f.Cnpj,f.RazaoSocial,f.DataCadastro,f.Ativo));
+
+            CreateMap<NovoFornecedorViewModel, Fornecedor>()
+				.ConstructUsing(f => new Fornecedor(f.CodigoID, f.Nome, f.Cnpj, f.RazaoSocial, f.DataCadastro, f.Ativo));
+
+        }
+	}
+}

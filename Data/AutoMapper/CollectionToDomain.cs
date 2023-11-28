@@ -1,0 +1,28 @@
+﻿using AutoMapper;
+
+using ListaH1.Data.Providers.MongoDb.Collections;
+using ListaH1.Domain.Entities;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ListaH1.Data.AutoMapper
+{
+	public class CollectionToDomain : Profile
+	{
+		public CollectionToDomain()
+		{
+
+			CreateMap<ProdutoCollection, Produto>()
+			   .ConstructUsing(q => new Produto(q.CodigoId, q.Nome, q.Descricao, q.Ativo, q.Valor, q.DataCadastro, q.QuantidadeEstoque));
+
+			CreateMap<CategoriaCollection, Categoria>()
+			   .ConstructUsing(q => new Categoria(q.CodigoId,  q.Descricao, q.Ativo));
+		
+		CreateMap<FornecedorCollection, Fornecedor>()
+				.ConstructUsing(f => new Fornecedor(f.CodigoId, f.Nome,f.Cnpj, f.RazaoSocial, f.DataCadastro, f.Ativo));
+		}
+	}
+}
